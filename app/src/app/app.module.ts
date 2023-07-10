@@ -10,9 +10,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,
