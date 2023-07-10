@@ -9,9 +9,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,
