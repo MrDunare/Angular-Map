@@ -11,9 +11,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component';
+import { CatFactComponent } from './cat-fact/cat-fact.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent, CatFactComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,
@@ -21,6 +24,7 @@ import { LandingComponent } from './landing/landing.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
