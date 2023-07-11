@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Fact } from './models/catFact.interface';
+import { Fact } from '../../models/catFact.interface';   
 
 @Component({
   selector: 'app-cat-fact',

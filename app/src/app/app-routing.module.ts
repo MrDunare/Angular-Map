@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from './landing/landing.component';
-import { CatFactComponent } from './cat-fact/cat-fact.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { CatFactComponent } from './components/cat-fact/cat-fact.component';
 
 
 const routes: Routes = [
