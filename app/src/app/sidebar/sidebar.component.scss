@@ -1,6 +1,6 @@
 mat-sidenav-container{
-    height: 100vh;
-    border: 1px soldi rgb(217, 214, 214);
+    height: auto;
+    
 }
 mat-sidenav, mat-sidenav-content{
     padding: 16px;
@@ -13,9 +13,26 @@ mat-sidenav{
 }
 mat-sidenav-content{
     background-color: #141d26;
+    overflow: hidden;
 }
 
 a {
     text-decoration: none;
     color: white;
 }
+
+.luna-img-container {
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden; /* Per tagliare l'immagine oltre il bordo destro */
+  }
+  
+  .luna-img {
+    
+    margin-left: 350px;
+    width: 90%; /* Larghezza al 100% del contenitore */
+    height: auto;
+    opacity: 0.1; /* Opacità dell'immagine (valore tra 0 e 1) */
+  }
