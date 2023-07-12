@@ -1,1 +1,15 @@
-<p>map works!</p>
+<div class="containe">
+  <div class="row">
+    <div class="col-3">
+      <div class="input">
+        <label for="">Choose a city</label><br />
+        <hr />
+        <input type="text" [(ngModel)]="city" />
+        <p>{{ city }}</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3" id="map" style=" height: 80vh;"></div>
+    </div>
+  </div>
+</div>

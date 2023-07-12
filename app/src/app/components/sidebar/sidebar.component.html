@@ -1,27 +1,32 @@
 <mat-sidenav-container>
   <mat-sidenav [opened]="true" mode="side">
-    <a routerLink="catfacts">
+    <a  routerLink="catfacts">
       <p class="mt-3">Facts about Cats</p>
+    </a>
+    
+    <a routerLink="map">
+      <p class="mt-3">Map</p>
     </a>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="container">
       <div class="row">
-        <div class="luna-container">
+       <!--<div class="luna-container">    chiedere ad alberto
+      </div> -->
           <router-outlet></router-outlet>
-        </div>
       </div>
       <div class="row">
         <div class="col"><br /></div>
-        <div class="col luna-img-container">
-          <img
-            class="luna-img"
-            src="assets/Full-Moon-Transparent-Image.png"
-            alt=""
-          />
-        </div>
       </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <app-footer></app-footer>
+<app-map></app-map>
+<!-- <div class="col luna-img-container">
+  <img
+    class="luna-img"
+    src="assets/Full-Moon-Transparent-Image.png"
+    alt=""
+  />
+</div> -->
