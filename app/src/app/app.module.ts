@@ -13,10 +13,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { CatFactComponent } from './components/cat-fact/cat-fact.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MapComponent } from './components/map/map.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent, CatFactComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent, CatFactComponent, MapComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,

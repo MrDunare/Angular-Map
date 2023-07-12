@@ -7,8 +7,6 @@ import { Fact } from '../models/catFact.interface';
 })
 export class CatService {
   urlApi = 'https://cat-fact.herokuapp.com/facts';
-  fact!: Fact;
-  catText: string = '';
 
   constructor(private http: HttpClient) {}
 
