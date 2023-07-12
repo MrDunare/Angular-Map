@@ -6,10 +6,19 @@
         <hr />
         <input type="text" [(ngModel)]="city" /> <br>
         <button class="btn btn-danger mt-2" (click)="getUrl()">Cerca</button>
+        <div [hidden]="!isCityUndefined" class="errore-ricerca-city mt-4">
+          <div  class="testo-errore m-2">
+            <h4 class="mt-2 mb-2">Error</h4>
+            <hr>
+            <p><strong>City not found.</strong></p>
+
+          </div>
+        </div>
       </div>
     </div>
     <div class="col">
-      <div class="mb-3" id="map" style=" height: 80vh;"></div>
+      <div class="mb-3 mt-4" id="map">
+      </div>
     </div>
   </div>
 </div>

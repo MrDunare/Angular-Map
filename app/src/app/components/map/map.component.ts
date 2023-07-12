@@ -12,6 +12,7 @@ export class MapComponent {
   lat = 51.505;
   lon = -0.09;
   map!: L.Map;
+  isCityUndefined: boolean = false;
 
   constructor(private mapService: MapService) {}
 
@@ -21,12 +22,20 @@ export class MapComponent {
 
   //collegato al bottone cerca
   getUrl() {
-    this.mapService.generateUrl(this.city);
-    this.mapService.getCoords().subscribe((data) => {
-      this.lat = data[0].lat;
-      this.lon = data[0].lon;
-      this.map.setView([this.lat, this.lon], 13);
-    });
+    try {
+      this.isCityUndefined = false;
+      this.mapService.generateUrl(this.city);
+      this.mapService.getCoords().subscribe((data) => {
+        if (data[0] === undefined) {
+          this.isCityUndefined = true;
+        }
+        this.lat = data[0].lat;
+        this.lon = data[0].lon;
+        this.map.setView([this.lat, this.lon], 13);
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   initMap() {
