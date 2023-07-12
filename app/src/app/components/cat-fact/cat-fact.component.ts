@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Fact } from '../../models/catFact.interface';   
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { CatService } from 'src/app/services/cat.service';
 
 @Component({
   selector: 'app-cat-fact',
@@ -8,20 +7,15 @@ import { Fact } from '../../models/catFact.interface';
   styleUrls: ['./cat-fact.component.scss'],
 })
 export class CatFactComponent {
-  urlApi = 'https://cat-fact.herokuapp.com/facts';
-  fact!: Fact;
+  fact!: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private catService: CatService) {}
 
   ngOnInit(): void {
-    this.getCatFacts();
-  }
-
-
-  getCatFacts() {
-    this.http.get<Fact[]>(this.urlApi).subscribe((data) => {
-      const randomIndex = Math.floor(Math.random() * data.length);
-      this.fact = data[randomIndex];
+    this.catService.getCatFacts().subscribe((data) => {
+      let randomIndex = Math.floor(Math.random() * data.length);
+      console.log(data);
+      this.fact = data[randomIndex].text;
     });
   }
 }
