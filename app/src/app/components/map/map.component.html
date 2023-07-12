@@ -11,8 +11,14 @@
             <h4 class="mt-2 mb-2">Error</h4>
             <hr>
             <p><strong>City not found.</strong></p>
-
           </div>
+        </div>
+        <div class="weather mt-5" *ngIf="isCityFound">
+          <p><strong>{{cityName}}</strong></p>
+          <img src="https://www.pngmart.com/files/3/Weather-PNG-HD.png" alt="" style="width: 40px;">
+          <p>Gradi : {{temp}}°</p>
+          <p>{{description}}</p>
+          <p>Paese : {{country}}</p>
         </div>
       </div>
     </div>
