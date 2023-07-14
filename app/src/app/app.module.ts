@@ -15,10 +15,19 @@ import { CatFactComponent } from './components/cat-fact/cat-fact.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './components/map/map.component';
 import { FormComponent } from './components/form/form.component';
-
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent, CatFactComponent, MapComponent, FormComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent,
+    LandingComponent,
+    CatFactComponent,
+    MapComponent,
+    FormComponent,
+  ],
   imports: [
     BrowserModule,
     MatToolbarModule,
@@ -26,7 +35,8 @@ import { FormComponent } from './components/form/form.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
