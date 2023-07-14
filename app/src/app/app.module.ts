@@ -14,10 +14,11 @@ import { LandingComponent } from './components/landing/landing.component';
 import { CatFactComponent } from './components/cat-fact/cat-fact.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './components/map/map.component';
+import { FormComponent } from './components/form/form.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent, CatFactComponent, MapComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, FooterComponent, LandingComponent, CatFactComponent, MapComponent, FormComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,
