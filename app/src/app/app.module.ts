@@ -16,6 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './components/map/map.component';
 import { FormComponent } from './components/form/form.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { ClientsTableComponent } from './clients-table/clients-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,7 @@ import { MatTableModule } from '@angular/material/table';
     CatFactComponent,
     MapComponent,
     FormComponent,
+    ClientsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +45,12 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     HttpClientModule,
     MatTableModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
