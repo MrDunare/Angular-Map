@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
@@ -10,16 +9,17 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  isFormOpened: boolean = false;
+
   //reactiveForm prova
   mainForm!: FormGroup;
-  reactiveFormClient!: object
+  reactiveFormClient!: Client;
 
-  clients!: Client[];
-  isFormOpened: boolean = false;
   constructor(private formService: FormService) {}
 
   ngOnInit(): void {
-    //sempre prova reactive forms
+    // reactive form init
+
     this.mainForm = new FormGroup({
       name: new FormControl('tonino'),
       surname: new FormControl(),
@@ -27,20 +27,26 @@ export class FormComponent implements OnInit {
       dateOfBirth: new FormControl(),
       email: new FormControl(),
       username: new FormControl(),
-      networth: new FormControl(),
+      netWorth: new FormControl(),
     });
 
     this.formService.getData().subscribe((data) => {
       console.log(data);
-      this.clients = data;
-      console.log(this.clients);
     });
   }
+
+  // form method that store the content from the form into an object
   onSubmit() {
-    this.reactiveFormClient = this.mainForm.value
-    console.log(this.reactiveFormClient)
+    this.reactiveFormClient = this.mainForm.value;
+    this.formService
+      .sendData(this.reactiveFormClient)
+      .subscribe((res) => {
+        console.log(this.reactiveFormClient);
+
+      });
   }
 
+  //linked to *ngIf to toggle the form
   openForm(): boolean {
     return (this.isFormOpened = !this.isFormOpened);
   }

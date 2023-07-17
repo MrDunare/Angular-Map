@@ -13,4 +13,8 @@ export class FormService {
   getData() {
     return this.https.get<Client[]>(this.urlClient);
   }
+
+  sendData(client: Client) {
+    return this.https.post(this.urlClient, client);
+  }
 }
