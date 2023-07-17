@@ -5,24 +5,43 @@
       <button class="btn btn-danger" (click)="openForm()">+</button>
 
       <hr />
-     
+
       <div class="col">
-        <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" *ngIf="isFormOpened">
+        <form
+          [formGroup]="mainForm"
+          (ngSubmit)="onSubmit()"
+          *ngIf="isFormOpened"
+        >
           <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput type="text" name="name" formControlName="name" />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Surname</mat-label>
-            <input matInput type="text" name="surname" formControlName="surname" />
+            <input
+              matInput
+              type="text"
+              name="surname"
+              formControlName="surname"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Fiscal Code</mat-label>
-            <input matInput type="text" name="fiscalCode" formControlName="fiscalCode" />
+            <input
+              matInput
+              type="text"
+              name="fiscalCode"
+              formControlName="fiscalCode"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Date of Birth</mat-label>
-            <input matInput type="text" name="dateOfBirth" formControlName="dateOfBirth" />
+            <input
+              matInput
+              type="text"
+              name="dateOfBirth"
+              formControlName="dateOfBirth"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Email</mat-label>
@@ -30,11 +49,21 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Username</mat-label>
-            <input matInput type="text" name="username"  formControlName="username"/>
+            <input
+              matInput
+              type="text"
+              name="username"
+              formControlName="username"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>netWorth</mat-label>
-            <input matInput type="email" name="netWorth" formControlName="netWorth"/>
+            <input
+              matInput
+              type="email"
+              name="netWorth"
+              formControlName="netWorth"
+            />
           </mat-form-field>
           <br />
           <div class="row">
@@ -56,9 +85,8 @@
         </form>
       </div>
     </div>
-    <div class="col-7 ">
-    
-      <app-table></app-table>
+    <div class="col-7">
+      <app-table [isTableUpdated]="isTableUpdated"></app-table>
     </div>
   </div>
 </div>

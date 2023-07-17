@@ -10,6 +10,7 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   isFormOpened: boolean = false;
+  isTableUpdated : boolean = false
 
   //reactiveForm prova
   mainForm!: FormGroup;
@@ -37,12 +38,13 @@ export class FormComponent implements OnInit {
 
   // form method that store the content from the form into an object
   onSubmit() {
+    this.isTableUpdated = false
     this.reactiveFormClient = this.mainForm.value;
     this.formService
       .sendData(this.reactiveFormClient)
       .subscribe((res) => {
         console.log(this.reactiveFormClient);
-
+        this.isTableUpdated = true
       });
   }
 

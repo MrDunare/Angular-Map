@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
 
@@ -7,16 +7,32 @@ import { FormService } from 'src/app/services/form.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
   dataSource!: Client[];
-  dataFromServer!: Client[];
+  @Input() isTableUpdated!: boolean;
 
-  constructor(private formService: FormService) {}
+  constructor(private formService: FormService) {
+    this.updateTable();
+  }
 
   ngOnInit() {
     this.formService.getData().subscribe((data) => {
       this.dataSource = data;
+      console.log(this.isTableUpdated);
     });
+  }
+
+  ngOnChanges() {
+    this.formService.getData().subscribe((data) => {
+      this.dataSource = data;
+    });
+  }
+
+  updateTable() {
+    if (this.isTableUpdated)
+      this.formService.getData().subscribe((data) => {
+        this.dataSource = data;
+      });
   }
 
   displayedColumns: string[] = [
