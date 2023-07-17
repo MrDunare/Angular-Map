@@ -8,7 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { CatFactComponent } from './components/cat-fact/cat-fact.component';
@@ -20,7 +20,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { ClientsTableComponent } from './clients-table/clients-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
@@ -34,7 +33,7 @@ import { MatSortModule } from '@angular/material/sort';
     CatFactComponent,
     MapComponent,
     FormComponent,
-    ClientsTableComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -43,6 +42,7 @@ import { MatSortModule } from '@angular/material/sort';
     BrowserAnimationsModule,
     MatSidenavModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatTableModule,
     MatSelectModule,
