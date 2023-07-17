@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
     // reactive form init
 
     this.mainForm = new FormGroup({
-      name: new FormControl('tonino'),
+      name: new FormControl(),
       surname: new FormControl(),
       fiscalCode: new FormControl(),
       dateOfBirth: new FormControl(),

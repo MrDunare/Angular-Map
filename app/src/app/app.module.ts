@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatSortModule } from '@angular/material/sort';
     CatFactComponent,
     MapComponent,
     FormComponent,
+    TableComponent,
     
   ],
   imports: [
@@ -51,6 +53,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
     MatPaginatorModule,
     MatSortModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
