@@ -9,8 +9,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-
-
   //Booleans to toggle off form for both POST and PUT https methods
   isFormOpened: boolean = false;
   isFormPutOpened: boolean = false;
@@ -20,12 +18,14 @@ export class FormComponent implements OnInit {
   mainForm!: FormGroup;
   reactiveFormClient!: Client;
 
-//ReactiveForm data PUT
+  //ReactiveForm data PUT
   mainFormPut!: FormGroup;
+  reactiveFormClientPut!: Client;
+
+  //variable for take the id
+  idClient!: number;
 
   constructor(private formService: FormService) {}
-
-
 
   ngOnInit(): void {
     // INIT POST FORM
@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
       netWorth: new FormControl(),
     });
 
-//INIT PUT FORM
+    //INIT PUT FORM
     this.mainFormPut = new FormGroup({
       name: new FormControl('pluto'),
       surname: new FormControl(),
@@ -50,9 +50,24 @@ export class FormComponent implements OnInit {
       username: new FormControl(),
       netWorth: new FormControl(),
     });
+  }
 
+  //
+  onSubmitUpdate() {
+    this.reactiveFormClientPut = this.mainFormPut.value;
+    return this.reactiveFormClientPut;
+  }
 
-   
+  //
+  updateClientPut() {
+    this.formService.updateClient(2, this.onSubmitUpdate()).subscribe(
+      () => {
+        console.log('wew2');
+      },
+      (error) => {
+        console.error("Errore durante l'aggiornamento:", error);
+      }
+    );
   }
 
   // form method that store the content from the form into an object
@@ -70,7 +85,7 @@ export class FormComponent implements OnInit {
     return (this.isFormOpened = !this.isFormOpened);
   }
 
- //linked to *ngIf to toggle the form for PUT
+  //linked to *ngIf to toggle the form for PUT
   openFormPut(): boolean {
     return (this.isFormPutOpened = !this.isFormPutOpened);
   }

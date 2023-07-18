@@ -28,4 +28,9 @@ export class FormService {
   deleteDataById(index: number) {
     return this.https.delete<Client>(`${this.urlClient}/${index}`);
   }
+
+  //UPDATE
+  updateClient(index: number, client: Client) {
+    return this.https.put<Client>(`${this.urlClient}/${index}`, client);
+  }
 }

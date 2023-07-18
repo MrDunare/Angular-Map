@@ -6,6 +6,7 @@
 
       <label for="">Update Client</label> &nbsp;
       <button class="btn btn-primary" (click)="openFormPut()">+</button>
+      <input type="text" name="" id="" [(ngModel)]="idClient">
       <hr />
 
       <div class="col">
@@ -53,7 +54,7 @@
         </form>
 
 <!--Form-PUT-HTTP-->
-        <form [formGroup]="mainFormPut" *ngIf="isFormPutOpened">
+        <form [formGroup]="mainFormPut" (ngSubmit)="updateClientPut()" *ngIf="isFormPutOpened">
           <mat-form-field>
             <mat-label>Nome</mat-label>
             <input matInput type="text" name="name" formControlName="name" />
