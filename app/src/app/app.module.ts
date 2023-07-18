@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TableComponent } from './components/table/table.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import { TableComponent } from './components/table/table.component';
     MapComponent,
     FormComponent,
     TableComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,8 @@ import { TableComponent } from './components/table/table.component';
     MatIconModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

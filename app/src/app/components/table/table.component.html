@@ -1,6 +1,8 @@
 <hr class="mt-5" />
 <br />
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
@@ -50,4 +52,25 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  <mat-paginator [length]="100"
+              [pageSize]="7"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page"
+              >
+</mat-paginator>
+
 </table>
+<div class="row">
+  <div class="col">
+    <label for="">Delete by Id</label><br>
+    <input type="text" name="" id="" [(ngModel)]="idClient"><br>
+    <button (click)="deleteClient()">Delete</button>
+  </div>
+  <div class="col">
+    <label for="">Get by Id</label><br>
+    <input type="text" name="" id="" [(ngModel)]="idClient"><br>
+    <button (click)="getByID()">Get Client</button>
+    <button (click)="getFullData()">Get Data</button>
+  </div>
+</div>
