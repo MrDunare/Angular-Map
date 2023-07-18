@@ -10,18 +10,22 @@ export class FormService {
 
   constructor(private https: HttpClient) {}
 
+  //GET
   getData() {
     return this.https.get<Client[]>(this.urlClient);
   }
+  //GET:ID
+  getById(index: number) {
+    return this.https.get<Client>(`${this.urlClient}/${index}`);
+  }
 
+  //POST
   sendData(client: Client) {
     return this.https.post(this.urlClient, client);
   }
 
+  //DELETE
   deleteDataById(index: number) {
     return this.https.delete<Client>(`${this.urlClient}/${index}`);
-  }
-  getById(index: number) {
-    return this.https.get<Client>(`${this.urlClient}/${index}`);
   }
 }

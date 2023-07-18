@@ -2,8 +2,10 @@
   <div class="row">
     <div class="col-3 mb-1">
       <label for="">Add data</label> &nbsp;
-      <button class="btn btn-danger" (click)="openForm()">+</button>
+      <button class="btn btn-danger" (click)="openForm()">+</button>&nbsp;
 
+      <label for="">Update Client</label> &nbsp;
+      <button class="btn btn-primary" (click)="openFormPut()">+</button>
       <hr />
 
       <div class="col">
@@ -40,6 +42,50 @@
           <div class="row">
             <div class="col">
               <button mat-raides-button class="btn btn-secondary" (click)="openForm()">
+                Cancella Form</button>&nbsp;
+            </div>
+            <div class="col">
+              <button mat-raides-button type="submit" class="btn btn-danger">
+                Invia
+              </button>
+            </div>
+          </div>
+        </form>
+
+<!--Form-PUT-HTTP-->
+        <form [formGroup]="mainFormPut" *ngIf="isFormPutOpened">
+          <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" name="name" formControlName="name" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Surname</mat-label>
+            <input matInput type="text" name="surname" formControlName="surname" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Fiscal Code</mat-label>
+            <input matInput type="text" name="fiscalCode" formControlName="fiscalCode" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+            <input matInput type="text" name="dateOfBirth" formControlName="dateOfBirth" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" name="email" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput type="text" name="username" formControlName="username" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>netWorth</mat-label>
+            <input matInput type="email" name="netWorth" formControlName="netWorth" />
+          </mat-form-field>
+          <br />
+          <div class="row">
+            <div class="col">
+              <button mat-raides-button class="btn btn-secondary" (click)="openFormPut()">
                 Cancella Form</button>&nbsp;
             </div>
             <div class="col">

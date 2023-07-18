@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -9,20 +9,29 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+
+
+  //Booleans to toggle off form for both POST and PUT https methods
   isFormOpened: boolean = false;
+  isFormPutOpened: boolean = false;
   isTableUpdated: boolean = false;
 
-  //reactiveForm data
+  //reactiveForm data POST
   mainForm!: FormGroup;
   reactiveFormClient!: Client;
 
+//ReactiveForm data PUT
+  mainFormPut!: FormGroup;
+
   constructor(private formService: FormService) {}
 
+
+
   ngOnInit(): void {
-    // reactive form init
+    // INIT POST FORM
 
     this.mainForm = new FormGroup({
-      name: new FormControl(),
+      name: new FormControl('Tonino'),
       surname: new FormControl(),
       fiscalCode: new FormControl(),
       dateOfBirth: new FormControl(),
@@ -31,9 +40,19 @@ export class FormComponent implements OnInit {
       netWorth: new FormControl(),
     });
 
-    this.formService.getData().subscribe((data) => {
-      console.log(data);
+//INIT PUT FORM
+    this.mainFormPut = new FormGroup({
+      name: new FormControl('pluto'),
+      surname: new FormControl(),
+      fiscalCode: new FormControl(),
+      dateOfBirth: new FormControl(),
+      email: new FormControl(),
+      username: new FormControl(),
+      netWorth: new FormControl(),
     });
+
+
+   
   }
 
   // form method that store the content from the form into an object
@@ -46,8 +65,13 @@ export class FormComponent implements OnInit {
     });
   }
 
-  //linked to *ngIf to toggle the form
+  //linked to *ngIf to toggle the form for POST
   openForm(): boolean {
     return (this.isFormOpened = !this.isFormOpened);
+  }
+
+ //linked to *ngIf to toggle the form for PUT
+  openFormPut(): boolean {
+    return (this.isFormPutOpened = !this.isFormPutOpened);
   }
 }
