@@ -40,19 +40,10 @@ export class FormComponent implements OnInit {
       netWorth: new FormControl(),
     });
 
-    //INIT PUT FORM
-    this.mainFormPut = new FormGroup({
-      name: new FormControl(),
-      surname: new FormControl(),
-      fiscalCode: new FormControl(),
-      dateOfBirth: new FormControl(),
-      email: new FormControl(),
-      username: new FormControl(),
-      netWorth: new FormControl(),
-    });
+    
   }
 
-  //
+  /*
   onSubmitUpdate() {
     this.reactiveFormClientPut = this.mainFormPut.value;
     return this.reactiveFormClientPut;
@@ -66,7 +57,9 @@ export class FormComponent implements OnInit {
         console.log(data);
       });
   }
+ */
 
+  
   // form method that store the content from the form into an object
   onSubmit() {
     this.isTableUpdated = false;
@@ -82,8 +75,5 @@ export class FormComponent implements OnInit {
     return (this.isFormOpened = !this.isFormOpened);
   }
 
-  //linked to *ngIf to toggle the form for PUT
-  openFormPut(): boolean {
-    return (this.isFormPutOpened = !this.isFormPutOpened);
-  }
+  
 }

@@ -2,6 +2,7 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -12,6 +13,9 @@ export class TableComponent implements OnInit, OnChanges {
   // Array of Client objects representing the data displayed in the table
   dataSource!: Client[];
 
+  //Formgroup to update single Client
+ 
+
   // ID of the selected client in the table
   idClient!: number;
   clientUsername!: string;
@@ -21,6 +25,18 @@ export class TableComponent implements OnInit, OnChanges {
 
   // Constructor of the class, performs dependency injection, including the FormService service
   constructor(private formService: FormService) {}
+
+  //Form update
+    updateForm = new FormGroup({
+    name: new FormControl('Tonino'),
+    surname: new FormControl(),
+    fiscalCode: new FormControl(),
+    dateOfBirth: new FormControl(),
+    email: new FormControl(),
+    username: new FormControl(),
+    netWorth: new FormControl(),
+  });
+
 
   // Method called at the start of the component's lifecycle
   ngOnInit() {
@@ -95,4 +111,10 @@ export class TableComponent implements OnInit, OnChanges {
     'netWorth',
     'actions',
   ];
+
+
+
+  
+
+
 }
