@@ -60,14 +60,11 @@ export class FormComponent implements OnInit {
 
   //
   updateClientPut() {
-    this.formService.updateClient(2, this.onSubmitUpdate()).subscribe(
-      () => {
-        console.log('wew2');
-      },
-      (error) => {
-        console.error("Errore durante l'aggiornamento:", error);
-      }
-    );
+    this.formService
+      .updateClient(2, this.onSubmitUpdate())
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   // form method that store the content from the form into an object

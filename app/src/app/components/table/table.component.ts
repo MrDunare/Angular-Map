@@ -14,6 +14,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   // ID of the selected client in the table
   idClient!: number;
+  clientUsername!: string;
 
   // Property used to check if the table has been updated or not.
   @Input() isTableUpdated!: boolean;
@@ -42,18 +43,18 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   // Method to delete a client from the server using the FormService service
-  deleteClient() {
-    this.formService.deleteDataById(this.idClient).subscribe(() => {
-      console.log(`Element number ${this.idClient} deleted successfully`);
+  deleteClient(id: number) {
+    this.formService.deleteDataById(id).subscribe(() => {
+      console.log(`Element number ${id} deleted successfully`);
       // After deletion, call the method to fetch all data from the server again
       this.getFullData();
     });
   }
 
   // Method to get a single Client object from the server using the FormService service
-  getByID() {
+  getUsername(id: number) {
     this.isTableUpdated = false;
-    this.formService.getById(this.idClient).subscribe((data) => {
+    this.formService.getUser(this.clientUsername, id).subscribe((data) => {
       console.log(data);
       // Reset the dataSource array with the single object obtained from the server
       this.dataSource = [data];
@@ -79,5 +80,6 @@ export class TableComponent implements OnInit, OnChanges {
     'fiscalCode',
     'username',
     'netWorth',
+    'actions',
   ];
 }

@@ -15,7 +15,7 @@ export class FormService {
     return this.https.get<Client[]>(this.urlClient);
   }
   //GET:ID
-  getById(index: number) {
+  getUser(user: string, index: number) {
     return this.https.get<Client>(`${this.urlClient}/${index}`);
   }
 
