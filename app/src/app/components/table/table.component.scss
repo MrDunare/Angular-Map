@@ -1,14 +1,32 @@
 table {
   width: 80%;
-  background-color: rgb(174, 201, 201);
+  background-color:#34495e;
+  color:white;
 }
 
 
 .update-form {
-  background-color: rgb(174, 201, 201);
-  border: 2px solid rgb(15, 15, 15);
+  background-color: #34495ee1;
   border-radius: 11px;
+
   
+
+}
+.getData{
+  background:linear-gradient(rgb(10, 10, 10),grey,rgb(10, 10, 10));
+  color:azure;
+  height: 32px;
+  justify-content: center;
+}
+
+td{
+  color: white;
+  font-family: sans-serif;
+}
+th{
+  color: white;
+  font-family: sans-serif;
+  font-size: 18px;
 
 }
 

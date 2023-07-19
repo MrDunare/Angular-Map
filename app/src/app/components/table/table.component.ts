@@ -85,6 +85,7 @@ export class TableComponent implements OnInit, OnChanges {
     'username',
     'netWorth',
     'actions',
+    'update',
   ];
 
   //-------------------------------------------------------------------------Form--------------------------------------------------------------------------------------
@@ -102,12 +103,12 @@ export class TableComponent implements OnInit, OnChanges {
 
   isFormToggle: boolean = false;
   updatedClient!: object;
-  updatedId!: number;
+  updatedId: number = 0;
 
   //Method to toggle off and on updateForm, is linked to update button in the table.
   openForm(id: number) {
     this.updatedId = id;
-    console.log(id)
+    console.log(id);
     this.isFormToggle = !this.isFormToggle;
     this.updateForm.patchValue(this.dataSource[this.updatedId]);
   }
@@ -115,11 +116,9 @@ export class TableComponent implements OnInit, OnChanges {
   //Method that takes param. from updateForm and create a Client type obj
   updatedFormResult() {
     this.updatedClient = this.updateForm.value;
-    console.log(this.updatedClient, this.updatedId);
     this.formService
       .updateClient(this.updatedId, this.updatedClient)
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe(() => {
         this.getFullData();
         this.isFormToggle = false;
       });
