@@ -42,7 +42,7 @@ export class FormComponent implements OnInit {
 
     //INIT PUT FORM
     this.mainFormPut = new FormGroup({
-      name: new FormControl('pluto'),
+      name: new FormControl(),
       surname: new FormControl(),
       fiscalCode: new FormControl(),
       dateOfBirth: new FormControl(),

@@ -1,3 +1,10 @@
+<div class="row">
+  <div class="col">
+    <label for="">Search User</label><br>
+    <input type="text" [(ngModel)]="clientUsername">
+    <button (click)="getUsername()">Get Data</button>
+  </div>
+  </div>
 <hr class="mt-5" />
 <br />
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -52,21 +59,14 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
-    <td mat-cell *matCellDef="let element"><button (click)="deleteClient(element.id)">delete</button><button>update</button></td>
+    <td mat-cell *matCellDef="let element"><button (click)="deleteClient(element.id)">delete</button>
+      <button>update</button></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-
   
   
 </table>
 
-<div class="row">
-<div class="col">
-  <label for="">Search User</label><br>
-  <input type="text" name="" id="" [(ngModel)]="clientUsername">
-  <!-- <button (click)="getUsername({{}})">Get Data</button> -->
-</div>
-</div>

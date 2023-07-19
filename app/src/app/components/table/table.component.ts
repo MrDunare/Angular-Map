@@ -39,6 +39,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.formService.getData().subscribe((data) => {
       // Update the dataSource array with the data obtained from the server
       this.dataSource = data;
+      console.log(this.dataSource)
     });
   }
 
@@ -52,14 +53,26 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   // Method to get a single Client object from the server using the FormService service
-  getUsername(id: number) {
+  getUsername() {
+    let id = this.getIdbyUsername(this.clientUsername)
     this.isTableUpdated = false;
-    this.formService.getUser(this.clientUsername, id).subscribe((data) => {
+    this.formService.getUser(id).subscribe((data) => {
       console.log(data);
       // Reset the dataSource array with the single object obtained from the server
       this.dataSource = [data];
       this.isTableUpdated = true;
     });
+  }
+
+// Method that return id of client from username
+  getIdbyUsername(username:string):number{
+    let userId:number = 0;
+    this.dataSource.forEach(element => {
+      if(element.username === username)
+        userId = element.id
+    });
+    return userId;
+
   }
 
   // Method to update the table view
