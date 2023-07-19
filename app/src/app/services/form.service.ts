@@ -30,7 +30,7 @@ export class FormService {
   }
 
   //UPDATE
-  updateClient(index: number, client: Client) {
+  updateClient(index: number, client: object) {
     return this.https.put<Client>(`${this.urlClient}/${index}`, client);
   }
 }

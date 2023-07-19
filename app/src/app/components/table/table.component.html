@@ -60,7 +60,7 @@
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
           <button (click)="deleteClient(element.id)">delete</button>
-          <button>update</button>
+          <button (click)="openForm(element.id)">update</button>
         </td>
       </ng-container>
 
@@ -73,8 +73,8 @@
 <div class="row text-center mt-5">
   <div class="col">
    
-    <form class="update-form mt-3 mb-3" [formGroup]="updateForm">
-        <h4 class="text-center text-black mt-2">Change parameters</h4>
+    <form class="update-form mt-3 mb-3" [formGroup]="updateForm" *ngIf="isFormToggle">
+        <h4 class="text-center text-black mt-2">Change parameters of element ID: {{updatedId}}</h4>
         <div class="row">
           <div class="col">
             <mat-form-field>
@@ -140,13 +140,9 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row mb-1">
           <div class="col">
-            <button mat-raides-button class="btn btn-secondary">
-              Cancella Form</button
-            >&nbsp;
-
-            <button mat-raides-button type="submit" class="btn btn-danger">
+            <button (click)="updatedFormResult()" mat-raides-button type="submit" class="btn btn-danger">
               Invia
             </button>
           </div>

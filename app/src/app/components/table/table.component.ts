@@ -13,9 +13,6 @@ export class TableComponent implements OnInit, OnChanges {
   // Array of Client objects representing the data displayed in the table
   dataSource!: Client[];
 
-  //Formgroup to update single Client
- 
-
   // ID of the selected client in the table
   idClient!: number;
   clientUsername!: string;
@@ -25,18 +22,6 @@ export class TableComponent implements OnInit, OnChanges {
 
   // Constructor of the class, performs dependency injection, including the FormService service
   constructor(private formService: FormService) {}
-
-  //Form update
-    updateForm = new FormGroup({
-    name: new FormControl('Tonino'),
-    surname: new FormControl(),
-    fiscalCode: new FormControl(),
-    dateOfBirth: new FormControl(),
-    email: new FormControl(),
-    username: new FormControl(),
-    netWorth: new FormControl(),
-  });
-
 
   // Method called at the start of the component's lifecycle
   ngOnInit() {
@@ -55,7 +40,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.formService.getData().subscribe((data) => {
       // Update the dataSource array with the data obtained from the server
       this.dataSource = data;
-      console.log(this.dataSource)
+      console.log(this.dataSource);
     });
   }
 
@@ -70,7 +55,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   // Method to get a single Client object from the server using the FormService service
   getUsername() {
-    let id = this.getIdbyUsername(this.clientUsername)
+    let id = this.getIdbyUsername(this.clientUsername);
     this.isTableUpdated = false;
     this.formService.getUser(id).subscribe((data) => {
       console.log(data);
@@ -80,23 +65,13 @@ export class TableComponent implements OnInit, OnChanges {
     });
   }
 
-// Method that return id of client from username
-  getIdbyUsername(username:string):number{
-    let userId:number = 0;
-    this.dataSource.forEach(element => {
-      if(element.username === username)
-        userId = element.id
+  // Method that return id of client from username
+  getIdbyUsername(username: string): number {
+    let userId: number = 0;
+    this.dataSource.forEach((element) => {
+      if (element.username === username) userId = element.id;
     });
     return userId;
-
-  }
-
-  // Method to update the table view
-  updateTable() {
-    // If the table has been updated, call the method to fetch all data from the server again
-    if (this.isTableUpdated) {
-      this.getFullData();
-    }
   }
 
   // Array of strings defining the columns of the table
@@ -112,9 +87,41 @@ export class TableComponent implements OnInit, OnChanges {
     'actions',
   ];
 
+  //-------------------------------------------------------------------------Form--------------------------------------------------------------------------------------
 
+  //Form update
+  updateForm = new FormGroup({
+    name: new FormControl(),
+    surname: new FormControl(),
+    fiscalCode: new FormControl(),
+    dateOfBirth: new FormControl(),
+    email: new FormControl(),
+    username: new FormControl(),
+    netWorth: new FormControl(),
+  });
 
-  
+  isFormToggle: boolean = false;
+  updatedClient!: object;
+  updatedId!: number;
 
+  //Method to toggle off and on updateForm, is linked to update button in the table.
+  openForm(id: number) {
+    this.updatedId = id;
+    console.log(id)
+    this.isFormToggle = !this.isFormToggle;
+    this.updateForm.patchValue(this.dataSource[this.updatedId]);
+  }
 
+  //Method that takes param. from updateForm and create a Client type obj
+  updatedFormResult() {
+    this.updatedClient = this.updateForm.value;
+    console.log(this.updatedClient, this.updatedId);
+    this.formService
+      .updateClient(this.updatedId, this.updatedClient)
+      .subscribe((data) => {
+        console.log(data);
+        this.getFullData();
+        this.isFormToggle = false;
+      });
+  }
 }
