@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3 mb-1">
+    <div class="col-md-3 mb-1">
       <label for="">Add data</label> &nbsp;
       <button mat-icon-button class="btn btn-danger" (click)="openForm()">+</button>&nbsp;
       <hr />
@@ -38,11 +38,11 @@
           <br />
           <div class="row">
             <div class="col">
-              <button mat-raides-button class="btn btn-secondary" (click)="openForm()">
+              <button mat-raised-button class="btn btn-secondary" (click)="openForm()">
                 Cancella Form</button>&nbsp;
             </div>
             <div class="col">
-              <button mat-raides-button type="submit" class="btn btn-danger">
+              <button mat-raised-button type="submit" class="btn btn-danger">
                 Invia
               </button>
             </div>
@@ -50,7 +50,7 @@
         </form>
       </div>
     </div>
-    <div class="col-7">
+    <div class="col-md-7">
       <app-table [isTableUpdated]="isTableUpdated"></app-table>
     </div>
   </div>
