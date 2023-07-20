@@ -2,7 +2,7 @@
   <div class="col">
     <label for="">Search Username</label><br />
     <input type="text" [(ngModel)]="clientUsername" />&nbsp;
-    <button class="btn getData " (click)="getUsername()"><mat-icon>search</mat-icon></button>
+    <button mat-raised-button (click)="getUsername()"><mat-icon>search</mat-icon></button>
   </div>
 </div>
 
@@ -68,7 +68,7 @@
         <ng-container matColumnDef="update">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-          <button (click)="openForm(element.id)"><mat-icon aria-hidden="false"fontIcon="edit_note"></mat-icon></button>
+          <button mat-raised-button (click)="openForm(element.id)"><mat-icon aria-hidden="false"fontIcon="edit_note"></mat-icon></button>
           </td>
       </ng-container>
 

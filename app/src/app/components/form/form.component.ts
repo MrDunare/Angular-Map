@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -31,49 +31,32 @@ export class FormComponent implements OnInit {
     // INIT POST FORM
 
     this.mainForm = new FormGroup({
-      name: new FormControl('Tonino'),
-      surname: new FormControl(),
-      fiscalCode: new FormControl(),
-      dateOfBirth: new FormControl(),
-      email: new FormControl(),
-      username: new FormControl(),
-      netWorth: new FormControl(),
+      name: new FormControl(null, Validators.required),
+      surname: new FormControl(null, Validators.required),
+      fiscalCode: new FormControl(null, Validators.required),
+      dateOfBirth: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl(null, Validators.required),
+      netWorth: new FormControl(null, Validators.required),
     });
-
-    
   }
 
-  /*
-  onSubmitUpdate() {
-    this.reactiveFormClientPut = this.mainFormPut.value;
-    return this.reactiveFormClientPut;
-  }
-
-  //
-  updateClientPut() {
-    this.formService
-      .updateClient(2, this.onSubmitUpdate())
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
- */
-
-  
   // form method that store the content from the form into an object
   onSubmit() {
-    this.isTableUpdated = false;
-    this.reactiveFormClient = this.mainForm.value;
-    this.formService.sendData(this.reactiveFormClient).subscribe((res) => {
-      console.log(this.reactiveFormClient);
-      this.isTableUpdated = true;
-    });
+    if (this.mainForm.valid) {
+      this.isTableUpdated = false;
+      this.reactiveFormClient = this.mainForm.value;
+      this.formService.sendData(this.reactiveFormClient).subscribe((res) => {
+        console.log(this.reactiveFormClient);
+        this.isTableUpdated = true;
+      });
+    } else {
+      alert('Form not Valid!');
+    }
   }
 
   //linked to *ngIf to toggle the form for POST
   openForm(): boolean {
     return (this.isFormOpened = !this.isFormOpened);
   }
-
-  
 }

@@ -2,7 +2,7 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -46,11 +46,13 @@ export class TableComponent implements OnInit, OnChanges {
 
   // Method to delete a client from the server using the FormService service
   deleteClient(id: number) {
-    this.formService.deleteDataById(id).subscribe(() => {
-      console.log(`Element number ${id} deleted successfully`);
-      // After deletion, call the method to fetch all data from the server again
-      this.getFullData();
-    });
+    if (window.confirm('Do you really want to delate this user??')) {
+      this.formService.deleteDataById(id).subscribe(() => {
+        console.log(`Element number ${id} deleted successfully`);
+        // After deletion, call the method to fetch all data from the server again
+        this.getFullData();
+      });
+    }
   }
 
   // Method to get a single Client object from the server using the FormService service
@@ -67,7 +69,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   // Method that return id of client from username
   getIdbyUsername(username: string): number {
-    let userId: number = 0;
+    let userId!: number;
     this.dataSource.forEach((element) => {
       if (element.username === username) userId = element.id;
     });
@@ -92,13 +94,13 @@ export class TableComponent implements OnInit, OnChanges {
 
   //Form update
   updateForm = new FormGroup({
-    name: new FormControl(),
-    surname: new FormControl(),
-    fiscalCode: new FormControl(),
-    dateOfBirth: new FormControl(),
-    email: new FormControl(),
-    username: new FormControl(),
-    netWorth: new FormControl(),
+    name: new FormControl(null, Validators.required),
+    surname: new FormControl(null, Validators.required),
+    fiscalCode: new FormControl(null, Validators.required),
+    dateOfBirth: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    username: new FormControl(null, Validators.required),
+    netWorth: new FormControl(null, Validators.required),
   });
 
   isFormToggle: boolean = false;
@@ -110,7 +112,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.updatedId = id;
     console.log(id);
     this.isFormToggle = !this.isFormToggle;
-    this.updateForm.patchValue(this.dataSource[this.updatedId]);
+    // this.updateForm.patchValue(this.dataSource[this.updatedId]);
   }
 
   //Method that takes param. from updateForm and create a Client type obj
