@@ -1,13 +1,13 @@
-<div class="container fluid">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
       <div class="input">
         <label for="">Choose a city</label><br />
         <hr />
         <input type="text" [(ngModel)]="city" /> <br>
         <button class="btn btn-danger mt-2" (click)="getUrl()">Cerca</button>
         <div [hidden]="!isCityUndefined" class="errore-ricerca-city mt-4">
-          <div  class="testo-errore m-2">
+          <div class="testo-errore m-2">
             <h4 class="mt-2 mb-2">Error</h4>
             <hr>
             <p><strong>City not found.</strong></p>
@@ -16,14 +16,15 @@
         <div class="weather mt-5" *ngIf="isCityFound">
           <p><strong>{{cityName}}</strong></p>
           <img src="https://www.pngmart.com/files/3/Weather-PNG-HD.png" alt="" style="width: 40px;">
-          <p>Gradi : {{temp}}°</p>
+          <p>Gradi: {{temp}}°</p>
           <p>{{description}}</p>
-          <p>Paese : {{country}}</p>
+          <p>Paese: {{country}}</p>
         </div>
       </div>
     </div>
-    <div class="col">
+    <div class="col-md">
       <div class="mb-3 mt-4" id="map">
+        <!-- Contenuto mappa qui -->
       </div>
     </div>
   </div>
