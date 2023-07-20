@@ -86,8 +86,8 @@ export class TableComponent implements OnInit, OnChanges {
     'fiscalCode',
     'username',
     'netWorth',
-    'actions',
-    'update',
+    'Delete',
+    'Update',
   ];
 
   //-------------------------------------------------------------------------Form--------------------------------------------------------------------------------------

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/models/client.interface';
 import { FormService } from 'src/app/services/form.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
@@ -25,7 +26,10 @@ export class FormComponent implements OnInit {
   //variable for take the id
   idClient!: number;
 
-  constructor(private formService: FormService) {}
+  constructor(
+    private formService: FormService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     // INIT POST FORM
@@ -51,12 +55,21 @@ export class FormComponent implements OnInit {
         this.isTableUpdated = true;
       });
     } else {
-      alert('Form not Valid!');
+      this.openSnackBar('The form is not Valid!!!');
+      setTimeout(() => {
+        this._snackBar.dismiss();
+      }, 3000);
     }
   }
 
   //linked to *ngIf to toggle the form for POST
   openForm(): boolean {
     return (this.isFormOpened = !this.isFormOpened);
+  }
+
+  //Snackbar
+
+  openSnackBar(message: string) {
+    this._snackBar.open('The form is not Valid!!!');
   }
 }
