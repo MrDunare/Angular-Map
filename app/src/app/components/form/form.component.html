@@ -16,10 +16,6 @@
             <input matInput type="text" name="surname" formControlName="surname" />
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Fiscal Code</mat-label>
-            <input matInput type="text" name="fiscalCode" formControlName="fiscalCode" />
-          </mat-form-field>
-          <mat-form-field>
             <mat-label>Date of Birth</mat-label>
             <input matInput type="text" name="dateOfBirth" formControlName="dateOfBirth" />
           </mat-form-field>
@@ -35,6 +31,11 @@
             <mat-label>netWorth</mat-label>
             <input matInput type="email" name="netWorth" formControlName="netWorth" />
           </mat-form-field>
+          <mat-form-field>
+            <mat-label>Fiscal Code</mat-label>
+            <input matInput type="text" name="fiscalCode" formControlName="fiscalCode" />
+          </mat-form-field>
+          <button mat-icon-button (click)="isFiscalOpened()"><mat-icon>calculate</mat-icon></button>
           <br />
           <div class="row">
             <div class="col">
@@ -52,6 +53,39 @@
     </div>
     <div class="col-md-7">
       <app-table [isTableUpdated]="isTableUpdated"></app-table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isFiscalToggled">
+  <div class="row Fiscal text-center text-white mt-5">
+    <span>Calculate Fiscal Code</span>
+  </div>
+  <div class="row data">
+    <div class="col">
+      <form [formGroup]="fiscalForm" (ngSubmit)="onSubmitFiscalForm()" >
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" name="name" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Surname</mat-label>
+          <input matInput type="text" name="surname" formControlName="surname" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Date of Birth</mat-label>
+          <input matInput type="text" name="dateOfBirth" formControlName="dateOfBirth" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <input matInput type="email" name="email" formControlName="gender" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Place of birth</mat-label>
+          <input matInput type="text" name="username" formControlName="placeOfBirth" />
+        </mat-form-field>
+        <button mat-raised-button type="submit">Invia</button>
+      </form>
     </div>
   </div>
 </div>

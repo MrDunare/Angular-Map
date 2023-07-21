@@ -20,13 +20,14 @@ export class FormComponent implements OnInit {
   isFormPutOpened: boolean = false;
   isTableUpdated: boolean = false;
 
-
   //reactiveForm data POST
   mainForm!: FormGroup;
   reactiveFormClient!: Client;
 
-
-
+  //ReactiveForm For Fiscal Code
+  fiscalForm!: FormGroup;
+  isFiscalToggled: boolean = false;
+  fiscalCode!: string;
 
   //variable for take the id
   idClient!: number;
@@ -42,7 +43,7 @@ export class FormComponent implements OnInit {
     this.mainForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       surname: new FormControl(null, Validators.required),
-      fiscalCode: new FormControl(null, [
+      fiscalCode: new FormControl(this.fiscalCode, [
         Validators.required,
         Validators.pattern('^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$'),
       ]),
@@ -54,7 +55,19 @@ export class FormComponent implements OnInit {
       username: new FormControl(null, Validators.required),
       netWorth: new FormControl(null, Validators.required),
     });
+
+    this.fiscalForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      surname: new FormControl(null, Validators.required),
+      dateOfBirth: new FormControl(null, [
+        Validators.required,
+        this.dateValidator,
+      ]),
+      gender: new FormControl(null, Validators.required),
+      placeOfBirth: new FormControl(null, Validators.required),
+    });
   }
+  // ------------------------------------Form Fiscal Code --------------------------------------------
 
   //---------------------------------------------------------------------Date Validation, format DD/MM/YYYY-------------------------
   dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -87,6 +100,18 @@ export class FormComponent implements OnInit {
     return null;
   }
 
+  onSubmitFiscalForm() {
+    console.log(this.calculateCodiceFiscale(this.fiscalForm.value));
+    this.mainForm
+      .get('fiscalCode')
+      ?.setValue(this.calculateCodiceFiscale(this.fiscalForm.value));
+    this.isFiscalOpened();
+  }
+
+  isFiscalOpened() {
+    this.isFiscalToggled = !this.isFiscalToggled;
+  }
+
   // form method that store the content from the form into an object
   onSubmit() {
     if (this.mainForm.valid) {
@@ -113,5 +138,55 @@ export class FormComponent implements OnInit {
 
   openSnackBar(message: string) {
     this._snackBar.open('The form is not Valid!!!');
+  }
+
+  calculateCodiceFiscale(data: any): string {
+    const accentedChars = 'àèéìòù';
+    const plainChars = 'aeiou';
+    const name = data.name
+      .toLowerCase()
+      .replace(
+        new RegExp(`[${accentedChars}]`, 'g'),
+        (ch: string) => plainChars[accentedChars.indexOf(ch)]
+      );
+    const surname = data.surname
+      .toLowerCase()
+      .replace(
+        new RegExp(`[${accentedChars}]`, 'g'),
+        (ch: string) => plainChars[accentedChars.indexOf(ch)]
+      );
+
+    const consonantsName = name
+      .split('')
+      .filter((c: string) => c.match(/[a-z]/i) && !'aeiou'.includes(c))
+      .slice(0, 3)
+      .join('');
+    const consonantsSurname = surname
+      .split('')
+      .filter((c: string) => c.match(/[a-z]/i) && !'aeiou'.includes(c))
+      .slice(0, 3)
+      .join('');
+
+    const yearOfBirth = data.dateOfBirth.substr(8, 2);
+
+    const months = 'ABCDEHLMPRST';
+    const monthOfBirth = months[parseInt(data.dateOfBirth.substr(3, 2)) - 1];
+
+    const dayOfBirth = data.dateOfBirth.substr(0, 2);
+
+    // Utilizziamo direttamente il codice fiscale del comune di Roma, invece di utilizzare un oggetto
+    const comuneOfBirth = 'H501';
+
+    const oddChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const evenChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const controlChar = oddChars[parseInt(dayOfBirth) - 1]
+      ? data.gender === 'M'
+        ? oddChars[parseInt(dayOfBirth) - 1]
+        : evenChars[parseInt(dayOfBirth) + 9] // Cambio il carattere di controllo per giorni pari nel genere femminile
+      : '';
+
+    const codiceFiscale = `${consonantsSurname}${consonantsName}${yearOfBirth}${monthOfBirth}${dayOfBirth}${comuneOfBirth}${controlChar}`;
+
+    return codiceFiscale.toUpperCase(); // Convertiamo tutto in maiuscolo
   }
 }
