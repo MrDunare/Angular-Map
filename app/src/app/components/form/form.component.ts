@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
   AbstractControl,
-  ValidationErrors
+  ValidationErrors,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -16,21 +16,29 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  //Booleans to toggle off form for both POST and PUT https methods
+  /*
+   *  Booleans Variables used as Params. for *ngIf from template.
+   */
   isFormOpened: boolean = false;
   isFormPutOpened: boolean = false;
   isTableUpdated: boolean = false;
+  isFiscalToggled: boolean = false;
 
-  //reactiveForm data POST
+  /**
+   * variable to store Data from backend and form for POST request
+   */
   mainForm!: FormGroup;
   reactiveFormClient!: Client;
 
-  //ReactiveForm For Fiscal Code
+  /**
+   * Form and variable for fiscalCode
+   */
   fiscalForm!: FormGroup;
-  isFiscalToggled: boolean = false;
   fiscalCode!: string;
 
-  //variable for take the id
+  /**
+   *  Variable to store ID from table
+   */
   idClient!: number;
 
   constructor(
@@ -38,47 +46,22 @@ export class FormComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-    // INIT POST FORM
+  /**
+   *
+   * ------------------------------------------------------------------------------Validators:   ---------------------------------------------------------------------------------------------------------
+   *
+   */
 
-    this.mainForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      surname: new FormControl(null, Validators.required),
-      fiscalCode: new FormControl(this.fiscalCode, [
-        Validators.required,
-        Validators.pattern('^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$'),
-      ]),
-      dateOfBirth: new FormControl(null, [
-        Validators.required,
-        this.dateValidator,
-      ]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      username: new FormControl(null, Validators.required),
-      netWorth: new FormControl(null,[ Validators.required, this.customNumberValidator]),
-    });
-
-    this.fiscalForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      surname: new FormControl(null, Validators.required),
-      dateOfBirth: new FormControl(null, [
-        Validators.required,
-        this.dateValidator,
-      ]),
-      gender: new FormControl(null, Validators.required),
-      placeOfBirth: new FormControl(null, Validators.required),
-    });
-  }
-  // ------------------------------------Number Validator --------------------------------------------
-  // Funzione del validator personalizzato
+  // ------------------------------------Number Validator --------------------------
   customNumberValidator(control: AbstractControl): ValidationErrors | null {
-  const value = control.value;
-  if (isNaN(value) || value < 0 || value > 100000000000000) {
-    return { customNumber: true };
+    const value = control.value;
+    if (isNaN(value) || value < 0 || value > 100000000000000) {
+      return { customNumber: true };
+    }
+    return null;
   }
-  return null;
-}
 
-  //---------------------------------------------------------------------Date Validation, format DD/MM/YYYY-------------------------
+  //- -------------------Date Validation, format DD/MM/YYYY-------------------------
   dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const value = control.value;
     if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
@@ -94,9 +77,8 @@ export class FormComponent implements OnInit {
       return { invalidDate: true };
     }
 
-    //---------------------------------------------------------------------Fiscal Code Validator-------------------------------------
+    //------------------------------------Fiscal Code Validator-------------------------
 
-    // Controllo per verificare la validità della data (ad esempio, non accettare il 30 febbraio)
     const date = new Date(year, month - 1, day);
     if (
       date.getFullYear() !== year ||
@@ -109,6 +91,9 @@ export class FormComponent implements OnInit {
     return null;
   }
 
+  /**
+   *  Submit the data coming from the fiscal code generator Form
+   */
   onSubmitFiscalForm() {
     console.log(this.calculateCodiceFiscale(this.fiscalForm.value));
     this.mainForm
@@ -117,11 +102,17 @@ export class FormComponent implements OnInit {
     this.isFiscalOpened();
   }
 
+  /**
+   * Function to toggle off and on the fiscal code Form usign the boolean value of isFiscalToggled
+   */
   isFiscalOpened() {
     this.isFiscalToggled = !this.isFiscalToggled;
   }
 
-  // form method that store the content from the form into an object
+  /**
+   * This commando from the POST form serves the function to create an Object to send to Backend usign the form values.
+   * if the form user inputs are invalid, the code in the else block takes place and produce a message for the user.
+   */
   onSubmit() {
     if (this.mainForm.valid) {
       this.isTableUpdated = false;
@@ -137,18 +128,36 @@ export class FormComponent implements OnInit {
       }, 3000);
     }
   }
+  /**
+   *
+   * snackbar Function
+   */
+  openSnackBar(message: string) {
+    this._snackBar.open('The form is not Valid!!!');
+  }
 
-  //linked to *ngIf to toggle the form for POST
+  /**
+   * Function to toggle off and on POST Form usign the boolean value of isFormOpened
+   */
   openForm(): boolean {
     return (this.isFormOpened = !this.isFormOpened);
   }
 
   //Snackbar
 
-  openSnackBar(message: string) {
-    this._snackBar.open('The form is not Valid!!!');
-  }
-
+  /**
+ * 
+    Viene definita una lista di caratteri accentati accentedChars e una lista di caratteri non accentati corrispondenti plainChars.
+    Il nome e il cognome forniti come input vengono convertiti in lettere minuscole e gli accenti vengono sostituiti con i caratteri non accentati corrispondenti. Questo viene fatto per evitare problemi di confronto con i caratteri accentati durante la creazione del Codice Fiscale.
+    Vengono estratte le prime tre consonanti dal nome e dal cognome (consonantsName e consonantsSurname) dopo aver rimosso le vocali. Queste saranno utilizzate per formare una parte del Codice Fiscale.
+    Viene estratto l'anno di nascita (yearOfBirth) dalle informazioni fornite sulla data di nascita.
+    Viene mappato il mese di nascita (monthOfBirth) in una lettera corrispondente utilizzando la seguente corrispondenza: A = gennaio, B = febbraio, C = marzo, D = aprile, E = maggio, H = giugno, L = luglio, M = agosto, P = settembre, R = ottobre, S = novembre, T = dicembre.
+    Viene estratto il giorno di nascita (dayOfBirth) dalle informazioni fornite sulla data di nascita.
+    Viene assegnato un codice fiscale fisso (comuneOfBirth) per il comune di nascita. In questo caso, è utilizzato il codice fiscale per il comune di Roma (H501).
+    Viene calcolato il carattere di controllo (controlChar) che varia in base al giorno di nascita e al genere. Se il giorno di nascita è dispari, viene utilizzato un carattere specifico. Se il giorno di nascita è pari e il genere è femminile, viene utilizzato un altro carattere.
+    Il codice fiscale completo viene creato concatenando le diverse parti nel seguente ordine: consonantsSurname + consonantsName + yearOfBirth + monthOfBirth + dayOfBirth + comuneOfBirth + controlChar.
+    Infine, il codice fiscale completo viene convertito in maiuscolo (toUpperCase()) e restituito come risultato della funzione.
+ */
   calculateCodiceFiscale(data: any): string {
     const accentedChars = 'àèéìòù';
     const plainChars = 'aeiou';
@@ -197,5 +206,42 @@ export class FormComponent implements OnInit {
     const codiceFiscale = `${consonantsSurname}${consonantsName}${yearOfBirth}${monthOfBirth}${dayOfBirth}${comuneOfBirth}${controlChar}`;
 
     return codiceFiscale.toUpperCase(); // Convertiamo tutto in maiuscolo
+  }
+
+  /**
+   * INIT COMPONENTE
+   */
+  ngOnInit(): void {
+    // INIT POST FORM
+
+    this.mainForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      surname: new FormControl(null, Validators.required),
+      fiscalCode: new FormControl(this.fiscalCode, [
+        Validators.required,
+        Validators.pattern('^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$'),
+      ]),
+      dateOfBirth: new FormControl(null, [
+        Validators.required,
+        this.dateValidator,
+      ]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl(null, Validators.required),
+      netWorth: new FormControl(null, [
+        Validators.required,
+        this.customNumberValidator,
+      ]),
+    });
+
+    this.fiscalForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      surname: new FormControl(null, Validators.required),
+      dateOfBirth: new FormControl(null, [
+        Validators.required,
+        this.dateValidator,
+      ]),
+      gender: new FormControl(null, Validators.required),
+      placeOfBirth: new FormControl(null, Validators.required),
+    });
   }
 }
