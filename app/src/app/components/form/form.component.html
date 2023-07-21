@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3 mb-1">
       <label for="">Add data</label> &nbsp;
-      <button mat-icon-button class="btn btn-danger" (click)="openForm()">+</button>&nbsp;
+      <button id="add-button" mat-icon-button color="accent"(click)="openForm()">+</button>&nbsp;
       <hr />
 
       <div class="col">
@@ -37,17 +37,14 @@
           </mat-form-field>
           <button mat-icon-button (click)="isFiscalOpened()"><mat-icon>calculate</mat-icon></button>
           <br />
-          <div class="row">
-            <div class="col">
-              <button mat-raised-button class="btn btn-secondary" (click)="openForm()">
-                Cancella Form</button>&nbsp;
-            </div>
-            <div class="col">
-              <button mat-raised-button type="submit" class="btn btn-danger">
+           
+              <button mat-button color="primary"  style="background-color: transparent;" (click)="openForm()">
+                <mat-icon>undo</mat-icon></button>&nbsp;
+                <button mat-raised-button color="primary" type="submit" >
                 Invia
               </button>
-            </div>
-          </div>
+          
+        
         </form>
       </div>
     </div>

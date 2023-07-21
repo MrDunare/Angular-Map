@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
   AbstractControl,
+  ValidationErrors
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -53,7 +54,7 @@ export class FormComponent implements OnInit {
       ]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       username: new FormControl(null, Validators.required),
-      netWorth: new FormControl(null, Validators.required),
+      netWorth: new FormControl(null,[ Validators.required, this.customNumberValidator]),
     });
 
     this.fiscalForm = new FormGroup({
@@ -67,7 +68,15 @@ export class FormComponent implements OnInit {
       placeOfBirth: new FormControl(null, Validators.required),
     });
   }
-  // ------------------------------------Form Fiscal Code --------------------------------------------
+  // ------------------------------------Number Validator --------------------------------------------
+  // Funzione del validator personalizzato
+  customNumberValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  if (isNaN(value) || value < 0 || value > 100000000000000) {
+    return { customNumber: true };
+  }
+  return null;
+}
 
   //---------------------------------------------------------------------Date Validation, format DD/MM/YYYY-------------------------
   dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
