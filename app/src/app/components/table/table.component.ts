@@ -55,6 +55,15 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
+  //Logic to tottle off Search by username form
+  searchFormToggle = false
+
+  searchToggle(){
+    this.searchFormToggle = !this.searchFormToggle
+  }
+
+
+  
   // Method to get a single Client object from the server using the FormService service
   getUsername() {
     let id = this.getIdbyUsername(this.clientUsername);
@@ -112,7 +121,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.updatedId = id;
     console.log(id);
     this.isFormToggle = !this.isFormToggle;
-    // this.updateForm.patchValue(this.dataSource[this.updatedId]);
+   // this.updateForm.patchValue(this.dataSource[this.updatedId]);
   }
 
   //Method that takes param. from updateForm and create a Client type obj
