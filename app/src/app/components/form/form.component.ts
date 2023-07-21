@@ -167,12 +167,12 @@ export class FormComponent implements OnInit {
       .slice(0, 3)
       .join('');
 
-    const yearOfBirth = data.dateOfBirth.substr(8, 2);
+    const yearOfBirth = data.dateOfBirth.substr(data.dateOfBirth.length - 2, 2);
 
     const months = 'ABCDEHLMPRST';
-    const monthOfBirth = months[parseInt(data.dateOfBirth.substr(3, 2)) - 1];
+    const monthOfBirth = months[parseInt(data.dateOfBirth.split('/')[1]) - 1];
 
-    const dayOfBirth = data.dateOfBirth.substr(0, 2);
+    const dayOfBirth = data.dateOfBirth.split('/')[0];
 
     // Utilizziamo direttamente il codice fiscale del comune di Roma, invece di utilizzare un oggetto
     const comuneOfBirth = 'H501';
