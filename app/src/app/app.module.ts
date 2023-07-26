@@ -29,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BeerGraphComponent } from './components/beer-graph/beer-graph.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { BeerGraphComponent } from './components/beer-graph/beer-graph.component
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    HighchartsChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
