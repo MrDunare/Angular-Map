@@ -28,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BeerGraphComponent } from './components/beer-graph/beer-graph.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MapComponent,
     FormComponent,
     TableComponent,
+    BeerGraphComponent,
   ],
   imports: [
     BrowserModule,

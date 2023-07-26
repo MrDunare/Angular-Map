@@ -4,6 +4,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { CatFactComponent } from './components/cat-fact/cat-fact.component';
 import { MapComponent } from './components/map/map.component';
 import { FormComponent } from './components/form/form.component';
+import { BeerGraphComponent } from './components/beer-graph/beer-graph.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: "catfacts" , component:CatFactComponent},
   {path: "map" , component:MapComponent},
   {path: "form" , component:FormComponent},
+  {path: "graph" , component:BeerGraphComponent},
 ];
 
 @NgModule({
