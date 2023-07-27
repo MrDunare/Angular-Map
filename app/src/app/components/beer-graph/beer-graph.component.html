@@ -1,7 +1,19 @@
-<input type="number" name="" id="" [(ngModel)]="numBeer">
-<button mat-raised-button color="primary" (click)="getValues()">Find graph!</button>
-
-<div *ngIf="isVisible">
-    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" [(update)]="updateFlag">
-    </highcharts-chart>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 text-center mt-4">
+            <input type="number" name="" id="" [(ngModel)]="numBeer">
+            <button mat-button [matMenuTriggerFor]="menu">Chose graph!</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="getValues()">columns</button>
+                <button mat-menu-item (click)="getValuesArea()">Area</button>
+            </mat-menu>
+            <div *ngIf="isVisible" class="mt-5">
+                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" [(update)]="updateFlag"
+                    class="chart">
+                </highcharts-chart>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
 </div>

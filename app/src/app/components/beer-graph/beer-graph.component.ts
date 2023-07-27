@@ -13,7 +13,8 @@ export class BeerGraphComponent {
   beerList: Beer[] = [];
   beerName: string[] = [];
   volumes: string[] = [];
-  isVisible: boolean = false
+  isVisible: boolean = false;
+  tupGraph: string = 'line';
 
   constructor(private graphServices: GraphService) {}
 
@@ -25,24 +26,29 @@ export class BeerGraphComponent {
     this.graphServices.getData().subscribe((data) => {
       this.beerList = data;
       console.log(data);
-  
+
       let seriesData: number[] = [];
-  
+
       this.beerList.forEach((element) => {
         this.beerName.push(element.name);
         this.volumes.push(element.alcohol.slice(0, -1));
         seriesData.push(parseFloat(element.alcohol.slice(0, -1)));
       });
-  
+
       this.chartOptions = {
+        chart: {
+          backgroundColor: 'grey',
+        },
         title: {
           text: 'Beer Graph',
         },
         series: [
           {
             type: 'column',
+
             name: 'Volume Alcohol',
             data: seriesData,
+            color: 'black',
           },
         ],
         xAxis: {
@@ -57,12 +63,58 @@ export class BeerGraphComponent {
           },
         },
       };
-  
+
       this.updateFlag = true;
-      this.isVisible = true
+      this.isVisible = true;
     });
   }
-  
+  getValuesArea() {
+    this.graphServices.generateUrl(this.numBeer);
+    this.graphServices.getData().subscribe((data) => {
+      this.beerList = data;
+      console.log(data);
+
+      let seriesData: number[] = [];
+
+      this.beerList.forEach((element) => {
+        this.beerName.push(element.name);
+        this.volumes.push(element.alcohol.slice(0, -1));
+        seriesData.push(parseFloat(element.alcohol.slice(0, -1)));
+      });
+
+      this.chartOptions = {
+        chart: {
+          backgroundColor: 'grey',
+        },
+        title: {
+          text: 'Beer Graph',
+        },
+        series: [
+          {
+            type: 'area',
+            name: 'Volume Alcohol',
+            data: seriesData,
+            color: 'black',
+          },
+        ],
+        xAxis: {
+          title: {
+            text: 'Name Beer',
+          },
+          categories: this.beerName,
+        },
+        yAxis: {
+          title: {
+            text: 'alcohol content',
+          },
+        },
+      };
+
+      this.updateFlag = true;
+      this.isVisible = true;
+    });
+  }
+
   chartOptions: Highcharts.Options = {
     title: {
       text: 'Beer Graph',
@@ -88,10 +140,3 @@ export class BeerGraphComponent {
     },
   };
 }
-
-
-
-
-
-
-
