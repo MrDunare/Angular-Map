@@ -18,23 +18,29 @@ export class BeerGraphComponent {
 
   constructor(private graphServices: GraphService) {}
 
+  // Declare Highcharts as a type for the Highcharts library
   Highcharts: typeof Highcharts = Highcharts;
   updateFlag = false;
 
+  // Method to fetch data from the graph service and display the graph as a column chart
   getValues() {
+    // Generate the URL based on the number of beers
     this.graphServices.generateUrl(this.numBeer);
+    // Fetch data from the service
     this.graphServices.getData().subscribe((data) => {
       this.beerList = data;
-      console.log(data);
 
+      // Initialize arrays to store beer names, volumes, and alcohol content
       let seriesData: number[] = [];
 
+      // Process each beer in the data
       this.beerList.forEach((element) => {
-        this.beerName.push(element.name);
-        this.volumes.push(element.alcohol.slice(0, -1));
-        seriesData.push(parseFloat(element.alcohol.slice(0, -1)));
+        this.beerName.push(element.name); // Collect beer names
+        this.volumes.push(element.alcohol.slice(0, -1)); // Collect alcohol volumes
+        seriesData.push(parseFloat(element.alcohol.slice(0, -1))); // Collect alcohol content as numbers
       });
 
+      // Highcharts options for the column chart
       this.chartOptions = {
         chart: {
           backgroundColor: 'grey',
@@ -45,7 +51,6 @@ export class BeerGraphComponent {
         series: [
           {
             type: 'column',
-
             name: 'Volume Alcohol',
             data: seriesData,
             color: 'black',
@@ -55,7 +60,7 @@ export class BeerGraphComponent {
           title: {
             text: 'Name Beer',
           },
-          categories: this.beerName,
+          categories: this.beerName, // Set beer names as categories on the x-axis
         },
         yAxis: {
           title: {
@@ -64,24 +69,30 @@ export class BeerGraphComponent {
         },
       };
 
-      this.updateFlag = true;
-      this.isVisible = true;
+      this.updateFlag = true; // Set updateFlag to trigger chart update
+      this.isVisible = true; // Set isVisible to show the chart
     });
   }
+
+  // Method to fetch data from the graph service and display the graph as an area chart
   getValuesArea() {
+    // Generate the URL based on the number of beers
     this.graphServices.generateUrl(this.numBeer);
+    // Fetch data from the service
     this.graphServices.getData().subscribe((data) => {
       this.beerList = data;
-      console.log(data);
 
+      // Initialize arrays to store beer names, volumes, and alcohol content
       let seriesData: number[] = [];
 
+      // Process each beer in the data
       this.beerList.forEach((element) => {
-        this.beerName.push(element.name);
-        this.volumes.push(element.alcohol.slice(0, -1));
-        seriesData.push(parseFloat(element.alcohol.slice(0, -1)));
+        this.beerName.push(element.name); // Collect beer names
+        this.volumes.push(element.alcohol.slice(0, -1)); // Collect alcohol volumes
+        seriesData.push(parseFloat(element.alcohol.slice(0, -1))); // Collect alcohol content as numbers
       });
 
+      // Highcharts options for the area chart
       this.chartOptions = {
         chart: {
           backgroundColor: 'grey',
@@ -101,7 +112,7 @@ export class BeerGraphComponent {
           title: {
             text: 'Name Beer',
           },
-          categories: this.beerName,
+          categories: this.beerName, // Set beer names as categories on the x-axis
         },
         yAxis: {
           title: {
@@ -110,28 +121,28 @@ export class BeerGraphComponent {
         },
       };
 
-      this.updateFlag = true;
-      this.isVisible = true;
+      this.updateFlag = true; // Set updateFlag to trigger chart update
+      this.isVisible = true; // Set isVisible to show the chart
     });
   }
 
+  // Default Highcharts options for the column chart
   chartOptions: Highcharts.Options = {
     title: {
       text: 'Beer Graph',
     },
-
     series: [
       {
         type: 'column',
         name: 'Volume Alcohol',
-        data: this.volumes,
+        data: this.volumes, // The data will be populated later with getValues or getValuesArea methods
       },
     ],
     xAxis: {
       title: {
         text: 'Name Beer',
       },
-      categories: this.beerName,
+      categories: this.beerName, // The categories will be populated later with getValues or getValuesArea methods
     },
     yAxis: {
       title: {
